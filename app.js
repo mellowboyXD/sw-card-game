@@ -28,5 +28,5 @@ app.use('/sw-card-game/deck', deckRoutes);
 app.use('/sw-card-game/game', gameRoutes);
 
 app.listen(42069, () => {
-    console.log('Server running at http://localhost:42069/');
+    console.log('Server running at http://localhost:42069/sw-card-game');
 });
