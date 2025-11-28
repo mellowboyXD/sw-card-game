@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars High Card Draw Game</title>
+    <link rel="stylesheet" href="/sw-card-game/css/style.css">
+    <link rel="shortcut icon" href="/sw-card-game/assets/images/sw-logo.png" type="image/x-icon">
+</head>
+<body id="index">
+    <header class="w-100">
+        <div class="container align-items-end pad-sm">
+            <button class="btn" onclick="toggleHelpModal()">Help</button>
+            <div class="modal-overlay" id="welcome">
+                <div class="modal-content" style="height: 200px;">
+                    <p>MAY THE FORCE BE WITH YOU!</p>
+                    <button class="btn" onclick="toggleWelcomeModal()">CLOSE</button>
+                </div>
+            </div>
+            <div class="modal-overlay" id="help-modal">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-between">
+                        <h2>How to play?</h2>
+                        <button class="btn" onclick="toggleHelpModal()">Close</button>
+                    </div>
+                    <div class="modal-main flex-2">
+                        <ol>
+                            <li>Cards are drawn sequentially from the deck.</li>
+                            <li>You may draw up to <em>five</em> cards.</li>
+                            <li>On the final draw, the card is automatically assigned to you.</li>
+                            <li>The selected card is then placed onto the War Zone to end the your turn.</li>
+                            <li>After your opponent completes their selection, the battle phase begins.</li>
+                            <li>Both cards are revealed simultaneously.</li>
+                            <li>The player with the higher-value card <em>wins</em>.</li>
+                            <li>If both cards have the same value, the round ends in a tie.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="w-100">
+        <div class="h-100 container align-items-center gap-2xlg">
+            <div class="container align-items-center">
+                <img class="logo" src="/sw-card-game/assets/images/sw-logo.png" alt="Star Wars logo">
+                <p class="subtitle mg-bottom-md">Card Game</p>
+            </div>
+            <div class="container">
+                <button class="btn fs-lg" onclick="newGame()">New Game</button>
+                <button class="btn fs-lg" onclick="viewDeck()">View Deck</button>
+            </div>
+        </div>
+    </main>
+    <footer class="container w-100 align-items-center gap-sm">
+        <small class="fs-xsm">991827128</small>
+        <small class="fs-xsm">&copy; 2025 <a href="https://github.com/mellowboyxd">Ishfaq Chamerally</a></small>
+    </footer>
+
+    <script src="/sw-card-game/js/utils.js"></script>
+    <script>
+        const backgroundAudio = new Audio('/sw-card-game/assets/audio/sw-main-theme.mp3');
+        const buttonClickedSE = new Audio('/sw-card-game/assets/audio/sw-lightsaber-se.mp3');
+
+        backgroundAudio.loop = true;
+
+        function toggleWelcomeModal() {
+            const modal = document.getElementById('welcome');
+            modal.classList.toggle('show');
+        }
+
+        function newGame() {
+            backgroundAudio.pause();
+            buttonClickedSE.play().catch(err => { console.error(err) });
+            setTimeout(() => {
+                window.location.assign('/sw-card-game/game');
+            }, 475)
+        }
+
+        function viewDeck() {
+            backgroundAudio.pause();
+            buttonClickedSE.play().catch(err => { console.error(err) });
+            setTimeout(() => {
+                window.location.assign('/sw-card-game/deck');
+            }, 475)
+        }
+
+        document.addEventListener('click', () => {
+            backgroundAudio.play().catch(err => { console.error(err); });
+        }, { once: true });
+
+        window.onload = function () {
+            toggleWelcomeModal();
+        }
+    </script>
+</body>
+</html>

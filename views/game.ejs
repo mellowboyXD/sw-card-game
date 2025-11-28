@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Game</title>
+    <link rel="stylesheet" href="/sw-card-game/css/style.css">
+    <link rel="stylesheet" href="/sw-card-game/css/card.css">
+    <link rel="stylesheet" href="/sw-card-game/css/deck.css">
+    <link rel="stylesheet" href="/sw-card-game/css/war-zone.css">
+    <link rel="shortcut icon" href="/sw-card-game/assets/images/sw-logo.png" type="image/x-icon">
+</head>
+<body>
+    <header class="w-100 d-flex">
+        <div class="container">
+            <button class="btn" onclick="window.location.assign('/sw-card-game/')">Home</button>
+        </div>
+        <div class="container pad-sm flex-2 w-100 align-items-center">
+            <img class="w-100" style="width: 200px;" src="/sw-card-game/assets/images/sw-logo.png" alt="star wars logo">
+        </div>
+        <div class="container align-items-end pad-sm">
+            <button class="btn" onclick="toggleHelpModal()">Help</button>
+            <div class="modal-overlay" id="help-modal">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-between">
+                        <h2>How to play?</h2>
+                        <button class="btn" onclick="toggleHelpModal()">Close</button>
+                    </div>
+                    <div class="modal-main flex-2">
+                        <ol>
+                            <li>Cards are drawn sequentially from the deck.</li>
+                            <li>You may draw up to <em>five</em> cards.</li>
+                            <li>On the final draw, the card is automatically assigned to you.</li>
+                            <li>The selected card is then placed onto the War Zone to end the your turn.</li>
+                            <li>After your opponent completes their selection, the battle phase begins.</li>
+                            <li>Both cards are revealed simultaneously.</li>
+                            <li>The player with the higher-value card <em>wins</em>.</li>
+                            <li>If both cards have the same value, the round ends in a tie.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="w-100 container justify-center align-items-center gap-md">
+        <div class="main-container">
+            <div class="deck-container">
+                <div class="deck" id="player-deck">
+                    <% for (let i = 0; i < 5; ++i) { %>
+                    <div class="card flipped" style="--i: <%= i %>">
+                        <div class="card-inner">
+                            <div class="card-front pad-sm" data-card-id=""'>
+                            </div>
+                            <div class="card-back pad-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <p>Your deck</p>
+                <div class="d-flex w-100 btn-container">
+                    <button class="btn" id="draw-card-btn" onclick="drawPlayerCard()">Draw Card</button>
+                </div>
+            </div>
+            <div class="war-zone">
+                <div class="w-100 d-flex justify-between align-items-center">
+                    <div class="player-war-zone" id="player-war-zone"></div>
+                    <span>v/s</span>
+                    <div class="opponent-war-zone" id="opponent-war-zone"></div>
+                </div>
+                <div class="w-100 d-flex justify-center">
+                    <button class="btn" onclick="nextState(this)">Next</button>
+                </div>
+            </div>
+            <div class="deck-container" style="opacity: 0.7;">
+                <div class="deck" id="opponent-deck">
+                    <% for (let i = 0; i < 5; ++i) { %>
+                    <div class="card flipped" style="--i: <%= i %>">
+                        <div class="card-inner">
+                            <div class="card-front pad-sm" data-card-id=""'>
+                            </div>
+                            <div class="card-back pad-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <p>Opponent's deck</p>
+            </div>
+        </div>
+    
+        <div class="overlay " id="overlay">
+            <div class="overlay-card" id="overlay-card">
+            </div>
+            <div class="d-flex gap-sm">
+                <button class="btn" onclick="drawAnotherCard()">Draw another</button>
+                <button class="btn btn-success" onclick="confirmCard()">Confirm</button>
+            </div>
+        </div>
+
+        <div class="game-over-overlay" id="game-over-overlay">
+            <div class="overlay-content" id="game-over-content"></div>
+            <div class="d-flex gap-md">
+                <button class="btn" onclick="window.location.assign('/sw-card-game/')">Main menu</button>
+                <button class="btn" onclick="window.location.assign('/sw-card-game/game/init')">Restart</button>
+            </div>
+        </div>
+    </main>
+    <footer class="container w-100 align-items-center gap-sm pad-xsm">
+        <small class="fs-xsm">991827128</small>
+        <small class="fs-xsm">&copy; 2025 <a href="https://github.com/mellowboyxd">Ishfaq Chamerally</a></small>
+    </footer>
+
+    <script src="/sw-card-game/js/utils.js"></script>
+    <script src="/sw-card-game/js/gameLogic.js"></script>
+</body>
+</html>

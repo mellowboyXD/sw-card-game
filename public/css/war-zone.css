@@ -1,0 +1,31 @@
+.war-zone {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.player-war-zone, .opponent-war-zone {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: calc(300/400);
+    transform: scale(0.8);
+    border: 3px dashed var(--color-tertiary);
+    border-radius: 8px;
+    transition: all 405ms ease-in;
+}
+
+.winner {
+    box-shadow: 0 0 60px var(--color-secondary);
+}
+
+@media only screen and (max-width: 800px) {
+    .war-zone {
+        width: 100%;
+        padding: 0;
+    }
+
+    .player-card, .opponent-card {
+        transform: scale(0.6);
+    }
+}
