@@ -1,4 +1,4 @@
-const DeckController = require('./deckController');
+const CardModel = require('../models/cardModel');
 
 const MAX_CARD = 5;
 
@@ -8,7 +8,7 @@ class GameController {
     }
 
     async createSession(req, res) {
-        const cards = await DeckController.fetchRandomCards(MAX_CARD + 1);
+        const cards = await CardModel.fetchRandomCards(MAX_CARD + 1);
         req.session.game = {
             deck: cards.slice(0, MAX_CARD),
             player: {},
